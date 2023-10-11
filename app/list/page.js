@@ -1,8 +1,18 @@
+'use client'
 
-export default function LinkStyle() {
-    
-    let products = ['tomatoes','pasta','coconut'];
-    
+import { useState } from "react";
+
+export default function List() {
+
+    let products = ['tomatoes', 'pasta', 'coconut'];
+    let [like, setLike] = useState(Array(products.length).fill(0));
+
+    const addLike = (index) => {
+        let newLike = [...like];
+        newLike[index]++;
+        setLike(newLike);
+    }
+
     return (
         <div>
             {
@@ -10,6 +20,8 @@ export default function LinkStyle() {
                     <div key={index}>
                         <img src={`/food${index}.png`} />
                         <h4>{item} $40</h4>
+                        <span>{like[index]}</span>
+                        <button onClick={() => addLike(index)}>+</button>
                     </div>
                 ))
             }
